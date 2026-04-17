@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>[Your Name] — DevOps & DevSecOps Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,300;1,9..144,400&family=Cabinet+Grotesk:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg:         #f5f2eb;
+      --bg2:        #eeead f;
+      --bg3:        #e8e4d9;
+      --card:       #faf8f4;
+      --border:     #ddd9ce;
+      --accent:     #c84b31;
+      --accent2:    #2d6a4f;
+      --accent3:    #1a3a5c;
+      --text:       #3a3530;
+      --text-dim:   #8c8278;
+      --text-head:  #1c1814;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-size: 15px;
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    /* subtle paper texture */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 6%;
+      height: 64px;
+      background: rgba(245,242,235,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Fraunces', serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-head);
+      font-style: italic;
+    }
+
+    .nav-logo em {
+      color: var(--accent);
+      font-style: normal;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 36px;
+    }
+
+    nav ul a {
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+      letter-spacing: 0.02em;
+    }
+
+    nav ul a:hover { color: var(--accent); }
+
+    /* ── WRAPPER ── */
+    .wrapper {
+      position: relative;
+      z-index: 1;
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 0 6%;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 64px;
+    }
+
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      padding: 80px 0;
+      width: 100%;
+    }
+
+    .hero-left {}
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      opacity: 0;
+      animation: fadeIn 0.7s ease forwards 0.1s;
+    }
+
+    .dot {
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+
+    h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2.8rem, 5vw, 4rem);
+      font-weight: 700;
+      color: var(--text-head);
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      margin-bottom: 20px;
+      opacity: 0;
+      animation: fadeIn 0.7s ease forwards 0.25s;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    .hero-desc {
+      font-size: 15px;
+      color: var(--text);
+      line-height: 1.8;
+      margin-bottom: 36px;
+      opacity: 0;
+      animation: fadeIn 0.7s ease forwards 0.4s;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeIn 0.7s ease forwards 0.55s;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 26px;
+      border-radius: 4px;
+      font-family: 'Cabinet Grotesk', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+      letter-spacing: 0.02em;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #faf8f4;
+    }
+
+    .btn-primary:hover {
+      background: #b03e28;
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(200,75,49,0.25);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1.5px solid var(--border);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    /* hero right — decorative card stack */
+    .hero-right {
+      opacity: 0;
+      animation: fadeIn 0.7s ease forwards 0.5s;
+    }
+
+    .hero-card-stack {
+      position: relative;
+      height: 340px;
+    }
+
+    .hc {
+      position: absolute;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+    }
+
+    .hc1 {
+      width: 88%;
+      top: 0; left: 6%;
+      transform: rotate(-2deg);
+      z-index: 1;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    }
+
+    .hc2 {
+      width: 88%;
+      top: 30px; left: 6%;
+      transform: rotate(1.5deg);
+      z-index: 2;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    }
+
+    .hc3 {
+      width: 88%;
+      top: 60px; left: 6%;
+      transform: rotate(0deg);
+      z-index: 3;
+      box-shadow: 0 16px 48px rgba(0,0,0,0.1);
+    }
+
+    .hc-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--text-dim);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .hc-title {
+      font-family: 'Fraunces', serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-head);
+      margin-bottom: 10px;
+    }
+
+    .hc-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .hc-tag {
+      font-size: 11px;
+      padding: 3px 9px;
+      border-radius: 20px;
+      font-weight: 500;
+    }
+
+    .hc-tag-red    { background: rgba(200,75,49,0.1);  color: var(--accent);  }
+    .hc-tag-green  { background: rgba(45,106,79,0.1);  color: var(--accent2); }
+    .hc-tag-blue   { background: rgba(26,58,92,0.1);   color: var(--accent3); }
+
+    /* ── SECTIONS ── */
+    section {
+      padding: 96px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 700;
+      color: var(--text-head);
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      margin-bottom: 52px;
+    }
+
+    h2 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .about-text p {
+      margin-bottom: 18px;
+      line-height: 1.85;
+    }
+
+    .about-text p:last-child { margin-bottom: 0; }
+
+    .about-sidebar {}
+
+    .sidebar-block {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+
+    .sidebar-block:last-child { margin-bottom: 0; }
+
+    .sidebar-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 12px;
+    }
+
+    .sidebar-stat {
+      font-family: 'Fraunces', serif;
+      font-size: 2.2rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .sidebar-label {
+      font-size: 13px;
+      color: var(--text-dim);
+    }
+
+    /* ── PROJECTS ── */
+    .projects-list {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .project-row {
+      display: grid;
+      grid-template-columns: 48px 1fr auto;
+      gap: 24px;
+      align-items: start;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .project-row:first-child { border-top: 1px solid var(--border); }
+
+    .project-row:hover .project-row-title { color: var(--accent); }
+    .project-row:hover .project-num { color: var(--accent); }
+
+    .project-num {
+      font-family: 'Fraunces', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--border);
+      line-height: 1.2;
+      transition: color 0.2s;
+      padding-top: 2px;
+    }
+
+    .project-row-body {}
+
+    .project-row-title {
+      font-family: 'Fraunces', serif;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-head);
+      margin-bottom: 8px;
+      transition: color 0.2s;
+      line-height: 1.2;
+    }
+
+    .project-row-desc {
+      font-size: 13px;
+      color: var(--text-dim);
+      line-height: 1.65;
+      margin-bottom: 12px;
+      max-width: 560px;
+    }
+
+    .project-row-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      padding: 3px 9px;
+      border-radius: 3px;
+      background: var(--bg3);
+      color: var(--text-dim);
+      border: 1px solid var(--border);
+    }
+
+    .project-arrow {
+      font-size: 20px;
+      color: var(--border);
+      transition: all 0.2s;
+      padding-top: 4px;
+    }
+
+    .project-row:hover .project-arrow {
+      color: var(--accent);
+      transform: translate(3px, -3px);
+    }
+
+    /* ── SKILLS ── */
+    .skills-columns {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .skill-col {
+      padding: 28px;
+      border-right: 1px solid var(--border);
+    }
+
+    .skill-col:last-child { border-right: none; }
+    .skill-col:nth-child(4),
+    .skill-col:nth-child(5),
+    .skill-col:nth-child(6) {
+      border-top: 1px solid var(--border);
+    }
+
+    .skill-col-title {
+      font-family: 'Fraunces', serif;
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-head);
+      margin-bottom: 16px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .skill-items {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+    .skill-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: var(--text);
+    }
+
+    .skill-item::before {
+      content: '';
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* ── CERTS ── */
+    .certs-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .cert-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 26px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      transition: all 0.2s;
+    }
+
+    .cert-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(0,0,0,0.07);
+    }
+
+    .cert-num {
+      font-family: 'Fraunces', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--border);
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .cert-name {
+      font-family: 'Fraunces', serif;
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-head);
+      margin-bottom: 4px;
+    }
+
+    .cert-issuer {
+      font-size: 13px;
+      color: var(--text-dim);
+      margin-bottom: 6px;
+    }
+
+    .cert-date {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--accent);
+    }
+
+    /* ── CONTACT ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .contact-text p {
+      line-height: 1.85;
+      margin-bottom: 16px;
+    }
+
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 18px 0;
+      border-bottom: 1px solid var(--border);
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .contact-link:first-child { border-top: 1px solid var(--border); }
+
+    .contact-link:hover { padding-left: 8px; }
+    .contact-link:hover .cl-label { color: var(--accent); }
+
+    .cl-icon {
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .cl-body {}
+
+    .cl-type {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      color: var(--text-dim);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .cl-label {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-head);
+      margin-top: 2px;
+      transition: color 0.2s;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer p {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+    }
+
+    footer span { color: var(--accent); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav ul { display: none; }
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero-right { display: none; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      .skills-columns { grid-template-columns: 1fr; }
+      .certs-grid { grid-template-columns: 1fr; }
+      .project-row { grid-template-columns: 36px 1fr auto; gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="nav-logo">Your<em>Name</em></div>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#certs">Credentials</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="wrapper">
+      <div class="hero-inner">
+        <div class="hero-left">
+          <div class="hero-eyebrow">
+            <span class="dot"></span>
+            Open to new opportunities
+          </div>
+          <h1>DevOps &amp; <em>DevSecOps</em> Engineer</h1>
+          <p class="hero-desc">
+            Building secure, automated, and scalable cloud-native infrastructure.
+            Specialising in DevSecOps pipelines, Kubernetes platforms, and cloud
+            architecture on AWS and Azure — backed by deep Linux systems expertise.
+          </p>
+          <div class="hero-cta">
+            <a href="#projects" class="btn btn-primary">View my work →</a>
+            <a href="#contact" class="btn btn-outline">Get in touch</a>
+          </div>
+        </div>
+        <div class="hero-right">
+          <div class="hero-card-stack">
+            <div class="hc hc1">
+              <div class="hc-label">Latest Project</div>
+              <div class="hc-title">Secure Container Supply Chain</div>
+              <div class="hc-tags">
+                <span class="hc-tag hc-tag-red">Cosign</span>
+                <span class="hc-tag hc-tag-green">Kyverno</span>
+              </div>
+            </div>
+            <div class="hc hc2">
+              <div class="hc-label">Core Expertise</div>
+              <div class="hc-title">GitOps · ArgoCD · Istio</div>
+              <div class="hc-tags">
+                <span class="hc-tag hc-tag-blue">Kubernetes</span>
+                <span class="hc-tag hc-tag-green">Zero Trust</span>
+              </div>
+            </div>
+            <div class="hc hc3">
+              <div class="hc-label">Certified</div>
+              <div class="hc-title">AWS Solutions Architect</div>
+              <div class="hc-tags">
+                <span class="hc-tag hc-tag-red">Associate</span>
+                <span class="hc-tag hc-tag-blue">Feb 2026</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="wrapper">
+      <div class="section-eyebrow">01 — About</div>
+      <h2>Background &amp; <em>Focus</em></h2>
+      <div class="about-grid reveal">
+        <div class="about-text">
+          <p>I'm a DevOps and Cloud Engineer with 6+ years of engineering experience, combining a strong Linux and systems background with hands-on expertise in modern cloud-native tooling.</p>
+          <p>My focus is DevSecOps — building secure software supply chains, policy-as-code enforcement, and shifting security left into CI/CD pipelines — alongside platform automation, Kubernetes operations, and infrastructure as code.</p>
+          <p>Previously I engineered production Linux systems for IoT and embedded environments, giving me a deep understanding of what happens below the abstraction layers that most cloud engineers never see.</p>
+          <p>I'm currently expanding my Kubernetes expertise and OpenShift knowledge, targeting platform and DevSecOps roles across the EU market, with a preference for remote-friendly positions.</p>
+        </div>
+        <div class="about-sidebar">
+          <div class="sidebar-block">
+            <div class="sidebar-title">Experience</div>
+            <div class="sidebar-stat">6+</div>
+            <div class="sidebar-label">Years engineering</div>
+          </div>
+          <div class="sidebar-block">
+            <div class="sidebar-title">Portfolio</div>
+            <div class="sidebar-stat">7+</div>
+            <div class="sidebar-label">Projects on GitLab</div>
+          </div>
+          <div class="sidebar-block">
+            <div class="sidebar-title">Location</div>
+            <div class="sidebar-stat" style="font-size:1.4rem">EU</div>
+            <div class="sidebar-label">Remote friendly · Open to relocation</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="wrapper">
+      <div class="section-eyebrow">02 — Projects</div>
+      <h2>Selected <em>Work</em></h2>
+      <div class="projects-list">
+
+        <a href="https://gitlab.com/yourprofile/project1" target="_blank" class="project-row reveal">
+          <div class="project-num">01</div>
+          <div class="project-row-body">
+            <div class="project-row-title">Secure Container Supply Chain</div>
+            <div class="project-row-desc">End-to-end DevSecOps pipeline with image signing via Cosign, admission policy enforcement with Kyverno, and automated vulnerability scanning. Aligned with SLSA and EU Cyber Resilience Act principles.</div>
+            <div class="project-row-tags">
+              <span class="tag">GitLab CI</span><span class="tag">Cosign</span><span class="tag">Kyverno</span><span class="tag">Trivy</span><span class="tag">Kubernetes</span>
+            </div>
+          </div>
+          <div class="project-arrow">↗</div>
+        </a>
+
+        <a href="https://gitlab.com/yourprofile/project2" target="_blank" class="project-row reveal">
+          <div class="project-num">02</div>
+          <div class="project-row-body">
+            <div class="project-row-title">GitOps Platform — ArgoCD, Gatekeeper & Istio</div>
+            <div class="project-row-desc">GitOps-driven deployment platform on AWS with policy-as-code enforcement via OPA/Gatekeeper, Istio service mesh for mTLS, and zero-trust network architecture on Kubernetes.</div>
+            <div class="project-row-tags">
+              <span class="tag">ArgoCD</span><span class="tag">Istio</span><span class="tag">OPA</span><span class="tag">AWS</span><span class="tag">GitOps</span>
+            </div>
+          </div>
+          <div class="project-arrow">↗</div>
+        </a>
+
+        <a href="https://gitlab.com/yourprofile/project3" target="_blank" class="project-row reveal">
+          <div class="project-num">03</div>
+          <div class="project-row-body">
+            <div class="project-row-title">DevSecOps Pipeline on AKS</div>
+            <div class="project-row-desc">Full DevSecOps pipeline deploying to Azure Kubernetes Service with Terraform IaC, integrated security scanning, and complete observability with Prometheus and Grafana.</div>
+            <div class="project-row-tags">
+              <span class="tag">AKS</span><span class="tag">Terraform</span><span class="tag">Prometheus</span><span class="tag">Grafana</span><span class="tag">Azure</span>
+            </div>
+          </div>
+          <div class="project-arrow">↗</div>
+        </a>
+
+        <a href="https://gitlab.com/yourprofile/project4" target="_blank" class="project-row reveal">
+          <div class="project-num">04</div>
+          <div class="project-row-body">
+            <div class="project-row-title">Serverless REST API — AWS Lambda & Terraform</div>
+            <div class="project-row-desc">Fully serverless REST API using AWS Lambda and API Gateway, infrastructure managed through Terraform with least-privilege IAM and automated deployment pipeline.</div>
+            <div class="project-row-tags">
+              <span class="tag">Lambda</span><span class="tag">API Gateway</span><span class="tag">Terraform</span><span class="tag">AWS</span>
+            </div>
+          </div>
+          <div class="project-arrow">↗</div>
+        </a>
+
+        <a href="https://gitlab.com/yourprofile/project5" target="_blank" class="project-row reveal">
+          <div class="project-num">05</div>
+          <div class="project-row-body">
+            <div class="project-row-title">Serverless Platform on Azure — Functions & Terraform</div>
+            <div class="project-row-desc">Cloud-native serverless feedback platform on Azure using Terraform for IaC and Azure Functions for event-driven compute. Demonstrates multi-cloud capability.</div>
+            <div class="project-row-tags">
+              <span class="tag">Azure Functions</span><span class="tag">Terraform</span><span class="tag">Key Vault</span><span class="tag">Azure</span>
+            </div>
+          </div>
+          <div class="project-arrow">↗</div>
+        </a>
+
+        <a href="https://gitlab.com/yourprofile/project6" target="_blank" class="project-row reveal">
+          <div class="project-num">06</div>
+          <div class="project-row-body">
+            <div class="project-row-title">EC2 Infrastructure Automation — Terraform & Ansible</div>
+            <div class="project-row-desc">End-to-end infrastructure provisioning on AWS EC2 with Terraform and application deployment automation using Ansible playbooks.</div>
+            <div class="project-row-tags">
+              <span class="tag">Terraform</span><span class="tag">Ansible</span><span class="tag">EC2</span><span class="tag">AWS</span><span class="tag">Docker</span>
+            </div>
+          </div>
+          <div class="project-arrow">↗</div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <div class="wrapper">
+      <div class="section-eyebrow">03 — Skills</div>
+      <h2>Technical <em>Expertise</em></h2>
+      <div class="skills-columns reveal">
+        <div class="skill-col">
+          <div class="skill-col-title">DevSecOps & Security</div>
+          <div class="skill-items">
+            <span class="skill-item">Cosign · Kyverno</span>
+            <span class="skill-item">OPA / Gatekeeper</span>
+            <span class="skill-item">Falco · Runtime Security</span>
+            <span class="skill-item">Policy as Code · RBAC</span>
+            <span class="skill-item">mTLS · Zero Trust</span>
+            <span class="skill-item">Image Scanning · SAST</span>
+            <span class="skill-item">Secret Management</span>
+          </div>
+        </div>
+        <div class="skill-col">
+          <div class="skill-col-title">Containers & Cloud</div>
+          <div class="skill-items">
+            <span class="skill-item">Kubernetes · Docker</span>
+            <span class="skill-item">Helm · Istio · ArgoCD</span>
+            <span class="skill-item">OpenShift · GitOps</span>
+            <span class="skill-item">AWS (EC2, EKS, Lambda)</span>
+            <span class="skill-item">Azure (AKS, Functions)</span>
+            <span class="skill-item">Terraform · Ansible</span>
+            <span class="skill-item">Argo Rollouts</span>
+          </div>
+        </div>
+        <div class="skill-col">
+          <div class="skill-col-title">CI/CD & Observability</div>
+          <div class="skill-items">
+            <span class="skill-item">GitLab CI/CD · Jenkins</span>
+            <span class="skill-item">GitHub Actions · Tekton</span>
+            <span class="skill-item">Prometheus · Grafana</span>
+            <span class="skill-item">Loki · Alertmanager</span>
+            <span class="skill-item">Python · Bash · Boto3</span>
+            <span class="skill-item">Linux (Advanced) · Yocto</span>
+            <span class="skill-item">PostgreSQL · Redis</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CERTS -->
+  <section id="certs">
+    <div class="wrapper">
+      <div class="section-eyebrow">04 — Credentials</div>
+      <h2>Certifications &amp; <em>Education</em></h2>
+      <div class="certs-grid">
+        <div class="cert-card reveal">
+          <div class="cert-num">01</div>
+          <div>
+            <div class="cert-name">AWS Certified Solutions Architect</div>
+            <div class="cert-issuer">Amazon Web Services · Associate Level</div>
+            <div class="cert-date">Feb 2026 – Feb 2029</div>
+          </div>
+        </div>
+        <div class="cert-card reveal">
+          <div class="cert-num">02</div>
+          <div>
+            <div class="cert-name">Kubernetes & OpenShift</div>
+            <div class="cert-issuer">CKA Course · OpenShift Administration</div>
+            <div class="cert-date">Actively studying · 2025–2026</div>
+          </div>
+        </div>
+        <div class="cert-card reveal">
+          <div class="cert-num">03</div>
+          <div>
+            <div class="cert-name">DevSecOps Bootcamp</div>
+            <div class="cert-issuer">TechWorld with Nana</div>
+            <div class="cert-date">Completed · 2024</div>
+          </div>
+        </div>
+        <div class="cert-card reveal">
+          <div class="cert-num">04</div>
+          <div>
+            <div class="cert-name">Electronic Systems Engineering</div>
+            <div class="cert-issuer">[Your University]</div>
+            <div class="cert-date">[Graduation Year]</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="wrapper">
+      <div class="section-eyebrow">05 — Contact</div>
+      <h2>Let's <em>Connect</em></h2>
+      <div class="contact-grid reveal">
+        <div class="contact-text">
+          <p>I'm currently open to new opportunities in DevOps, DevSecOps, Platform Engineering, and Cloud Engineering roles across the EU — with a preference for remote or hybrid positions.</p>
+          <p>Whether you have a role in mind, want to discuss a project, or just want to connect — I'd love to hear from you.</p>
+          <a href="mailto:your@email.com" class="btn btn-primary" style="margin-top: 8px">Send a message →</a>
+        </div>
+        <div class="contact-links">
+          <a href="mailto:your@email.com" class="contact-link">
+            <span class="cl-icon">✉️</span>
+            <div class="cl-body">
+              <div class="cl-type">Email</div>
+              <div class="cl-label">your@email.com</div>
+            </div>
+          </a>
+          <a href="https://linkedin.com/in/yourprofile" target="_blank" class="contact-link">
+            <span class="cl-icon">💼</span>
+            <div class="cl-body">
+              <div class="cl-type">LinkedIn</div>
+              <div class="cl-label">linkedin.com/in/yourprofile</div>
+            </div>
+          </a>
+          <a href="https://gitlab.com/yourprofile" target="_blank" class="contact-link">
+            <span class="cl-icon">🦊</span>
+            <div class="cl-body">
+              <div class="cl-type">GitLab</div>
+              <div class="cl-label">gitlab.com/yourprofile</div>
+            </div>
+          </a>
+          <a href="https://github.com/yourprofile" target="_blank" class="contact-link">
+            <span class="cl-icon">🐙</span>
+            <div class="cl-body">
+              <div class="cl-type">GitHub</div>
+              <div class="cl-label">github.com/yourprofile</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrapper">
+      <div class="footer-inner">
+        <p>© 2026 <span>[Your Name]</span></p>
+        <p>DevOps · DevSecOps · Platform Engineering</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 70);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('nav ul a');
+    window.addEventListener('scroll', () => {
+      let current = '';
+      sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.getAttribute('id'); });
+      navLinks.forEach(a => { a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--accent)' : ''; });
+    });
+  </script>
+</body>
+</html>
